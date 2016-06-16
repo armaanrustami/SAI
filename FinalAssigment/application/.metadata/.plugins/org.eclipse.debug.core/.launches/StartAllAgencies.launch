@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/Travel_Agency/src/travel_agency/travel_agency_frame/booking/app/agency/StartAllAgencies.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="travel_agency.travel_agency_frame.booking.app.agency.StartAllAgencies"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Travel_Agency"/>
+</launchConfiguration>

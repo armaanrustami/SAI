@@ -1,0 +1,84 @@
+package ClientGateway;
+
+import java.util.HashMap;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+import javax.naming.NamingException;
+
+import Chain.MessageReceiver;
+import Chain.MessageSender;
+import booking.model.client.ClientBookingRequest;
+
+
+
+
+
+
+
+
+public abstract  class BookingClientGT {
+
+	MessageSender sender; 
+	 MessageReceiver reciever;
+//	LoanSerializer serializer;
+	String Channel="ClientToBroker";
+	String Channel1="BrokerToClient";
+	HashMap<String,ClientBookingRequest> Hash ;
+	
+	
+	public BookingClientGT(String Channel){
+		this.Channel=Channel;
+		try {
+			sender=new MessageSender(Channel1);
+			reciever=new MessageReceiver(Channel );
+			serializer=new LoanSerializer();
+		} catch (JMSException e1) {
+			e1.printStackTrace();
+		} catch (NamingException e1) {
+			e1.printStackTrace();
+		}
+	
+		Hash=new HashMap<String, LoanRequest>();
+		
+		reciever.setListener(new MessageListener(){
+				@Override
+				public void onMessage(Message msg) {
+				try {
+					if(Hash.containsKey(msg.getJMSCorrelationID()))		
+					{				
+						LoanReply reply=serializer.replyFromSTring(((TextMessage)msg).getText());
+						try {
+						onLoanReplyArrived(Hash.get(msg.getJMSCorrelationID()) , reply);
+						} catch (JMSException e) {	
+						}
+						}
+				} catch (JMSException e) {	
+				}
+					
+				}
+		});
+	}
+	public void applyForLoan(LoanRequest loan){
+		
+	
+		String MsgId="";
+		try {
+			MsgId = sender.Send(sender.createTextMessage(serializer.requestToString(loan)));
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Hash.put(MsgId,loan);
+		System.out.println("ClienSend: "+MsgId);
+		
+		
+		
+	} 
+	public abstract void onLoanReplyArrived(LoanRequest request, LoanReply reply);
+		
+	
+	
+}

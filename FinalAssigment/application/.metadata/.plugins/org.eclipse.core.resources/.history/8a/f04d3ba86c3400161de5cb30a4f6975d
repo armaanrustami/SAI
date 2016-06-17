@@ -1,0 +1,27 @@
+package ClientGateway;
+
+public class ClientSerializer {
+    Genson genson;
+
+    public ClientSerializer() {
+        this.genson = new Genson();
+    }
+    
+    public String requestToString(LoanRequest request) {
+        return genson.serialize(request);
+    }
+    
+    public LoanRequest requestFromString(String str) {
+        return genson.deserialize(str, LoanRequest.class);
+    }
+    
+    public String replyToString(LoanReply reply){
+       
+			return genson.serialize(reply);
+		
+    }
+    
+    public LoanReply replyFromSTring(String str){
+        return genson.deserialize(str, LoanReply.class);
+    }
+}

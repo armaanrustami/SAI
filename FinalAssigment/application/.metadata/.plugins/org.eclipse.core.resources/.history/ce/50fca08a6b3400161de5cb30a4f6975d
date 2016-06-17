@@ -1,0 +1,44 @@
+package ChainGW;
+
+
+import com.owlike.genson.Genson;
+
+import model.loan.LoanReply;
+import model.loan.LoanRequest;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+/**
+ *
+ * 
+ */
+public class LoanSerializer {
+    Genson genson;
+
+    public LoanSerializer() {
+        this.genson = new Genson();
+    }
+    
+    public String requestToString(LoanRequest request) {
+        return genson.serialize(request);
+    }
+    
+    public LoanRequest requestFromString(String str) {
+        return genson.deserialize(str, LoanRequest.class);
+    }
+    
+    public String replyToString(LoanReply reply){
+       
+			return genson.serialize(reply);
+		
+    }
+    
+    public LoanReply replyFromSTring(String str){
+        return genson.deserialize(str, LoanReply.class);
+    }
+}

@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="Chain.MessageSender"/>
+<fullyQualifiedTypeName name="Chain.MessageReceiver"/>
+<fullyQualifiedTypeName name="booking.model.client.ClientBookingRequest"/>
+<fullyQualifiedTypeName name="booking.model.client.ClientBookingReply"/>
+<fullyQualifiedTypeName name="com.owlike.genson.Genson"/>
+</qualifiedTypeNameHistroy>

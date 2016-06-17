@@ -11,11 +11,16 @@ import booking.model.client.ClientBookingReply;
 import booking.model.client.ClientBookingRequest;
 import javax.swing.JCheckBox;
 
+import ClientGateway.BookingClientGT;
+
+
 /**
  *
  * @author mpesic
  */
+
 public class BookingClientFrame extends javax.swing.JFrame {
+	  BookingClientGT gateway;
 
     private DefaultListModel<ClientListLine> listModel = new DefaultListModel<>();
 
@@ -24,6 +29,14 @@ public class BookingClientFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public BookingClientFrame() {
+    	gateway=new BookingClientGT("bookCheapQueue") {
+			
+			@Override
+			public void onBookingReplyArrived(ClientBookingRequest request, ClientBookingReply reply) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
         initComponents();
         setTransfer(this.jcbTransfer.isSelected());
     }
@@ -229,7 +242,7 @@ public class BookingClientFrame extends javax.swing.JFrame {
         }
 
         ClientBookingRequest request = new ClientBookingRequest(fromAirport, toAirport, nrTravellers, transferAddress);
-
+        gateway.applyForBooking(request);
         listModel.addElement(new ClientListLine(request, null));
     }//GEN-LAST:event_jbSendActionPerformed
 

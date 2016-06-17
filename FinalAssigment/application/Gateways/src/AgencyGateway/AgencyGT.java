@@ -1,0 +1,74 @@
+package AgencyGateway;
+
+import java.util.HashMap;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+import javax.naming.NamingException;
+
+import Chain.MessageReceiver;
+import Chain.MessageSender;
+import booking.model.agency.AgencyReply;
+import booking.model.agency.AgencyRequest;
+
+public abstract class AgencyGT {
+
+	MessageReceiver Reciever;
+	MessageSender sender;
+
+	AgencySerializer serializer;
+	HashMap<AgencyRequest, String> Hash;
+
+	public AgencyGT(String Channel) {
+		// sender=new MessageSenderGateway(ChannelName)
+		try {
+			Hash = new HashMap<>();
+			// todo
+			Reciever = new MessageReceiver(Channel);
+			sender = new MessageSender("AgencyToClient");
+			serializer = new AgencySerializer();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Reciever.setListener(new MessageListener() {
+
+			@Override
+			public void onMessage(Message arg0) {
+				// TODO Auto-generated method stub
+
+				try {
+					AgencyRequest Reques = serializer.requestFromString(((TextMessage) arg0).getText());
+					onAgencyReplyArrived(null, Reques);
+					Hash.put(Reques, arg0.getJMSCorrelationID());
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
+
+	}
+
+	public abstract void onAgencyReplyArrived(AgencyReply reply, AgencyRequest request);
+
+	public void onAgencyReply(AgencyReply reply, AgencyRequest request) {
+
+		try {
+			sender.createTextMessage(serializer.replyToString(reply));
+			sender.Send(sender.createTextMessage(serializer.replyToString(reply)), Hash.get(request));
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}

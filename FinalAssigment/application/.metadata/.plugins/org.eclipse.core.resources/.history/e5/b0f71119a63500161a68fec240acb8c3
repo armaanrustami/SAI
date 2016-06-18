@@ -101,7 +101,10 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    public void addRequest(BookingAgencyListLine obj){
+    	
+    	listModel.addElement(obj);
+    }
     private void jbSendAgencyReplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendAgencyReplyActionPerformed
         BookingAgencyListLine jListLine = jList1.getSelectedValue();
         double price = Double.parseDouble(this.jtfTotalPrice.getText());
@@ -156,8 +159,4 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
     private javax.swing.JButton jbSendAgencyReply;
     private javax.swing.JTextField jtfTotalPrice;
     // End of variables declaration//GEN-END:variables
- public void addRequest(BookingAgencyListLine obj){
-    	
-    	listModel.addElement(obj);
-    }
 }

@@ -18,8 +18,8 @@ public class AgencySerializer {
     public String requestToString(ClientBookingRequest request) {
         return genson.serialize(request);
     }
-    public AgencyRequest requestFromString(String str) {
-    	return genson.deserialize(str, AgencyRequest.class);
+    public ClientBookingRequest requestFromString(String str) {
+    	return genson.deserialize(str, ClientBookingRequest.class);
     }
     
     public String replyToString(AgencyReply reply){

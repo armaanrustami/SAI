@@ -12,11 +12,12 @@ import Chain.MessageReceiver;
 import Chain.MessageSender;
 import booking.model.agency.AgencyReply;
 import booking.model.agency.AgencyRequest;
+import booking.model.client.ClientBookingRequest;
 
 public abstract class AgencyGT {
 
 	MessageReceiver Reciever;
-	MessageSender sender;
+	//MessageSender sender;
 
 	AgencySerializer serializer;
 	HashMap<AgencyRequest, String> Hash;
@@ -24,16 +25,12 @@ public abstract class AgencyGT {
 	public AgencyGT(String Channel) {
 		// sender=new MessageSenderGateway(ChannelName)
 		try {
-			Hash = new HashMap<>();
+		
 			// todo
 			Reciever = new MessageReceiver(Channel);
-			sender = new MessageSender("AgencyToClient");
+			//sender = new MessageSender("AgencyToClient");
 			serializer = new AgencySerializer();
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
+		} catch (JMSException | NamingException e) {
 			e.printStackTrace();
 		}
 		Reciever.setListener(new MessageListener() {
@@ -43,9 +40,11 @@ public abstract class AgencyGT {
 				// TODO Auto-generated method stub
 
 				try {
-					AgencyRequest Reques = serializer.requestFromString(((TextMessage) arg0).getText());
-					onAgencyReplyArrived(null, Reques);
-					Hash.put(Reques, arg0.getJMSCorrelationID());
+					System.out.println("DONE");
+					ClientBookingRequest Reques = serializer.requestFromString(((TextMessage) arg0).getText());
+					AgencyRequest Req=new AgencyRequest(Reques.getDestinationAirport(), Reques.getOriginAirport(), Reques.getNumberOfTravellers());
+					onAgencyReplyArrived(null, Req);
+					//Hash.put(Reques, arg0.getJMSCorrelationID());
 				} catch (JMSException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -61,13 +60,13 @@ public abstract class AgencyGT {
 
 	public void onAgencyReply(AgencyReply reply, AgencyRequest request) {
 
-		try {
-			sender.createTextMessage(serializer.replyToString(reply));
-			sender.Send(sender.createTextMessage(serializer.replyToString(reply)), Hash.get(request));
+		/*try {
+		//	sender.createTextMessage(serializer.replyToString(reply));
+			//sender.Send(sender.createTextMessage(serializer.replyToString(reply)), Hash.get(request));
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 

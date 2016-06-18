@@ -18,7 +18,7 @@ import AgencyGateway.AgencyGT;
 public class BookingAgencyFrame extends javax.swing.JFrame {
 
 
-	AgencyGT agency;
+	
     private DefaultListModel<BookingAgencyListLine> listModel = new DefaultListModel<>();
     private String agencyName;
 
@@ -31,14 +31,7 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
     public BookingAgencyFrame(String agencyName, String bankRequestQueue) {
     	
         initComponents();
-        agency=new AgencyGT(bankRequestQueue) {
-			
-			@Override
-			public void onAgencyReplyArrived(AgencyReply reply, AgencyRequest request) {
-				// TODO Auto-generated method stub
-				System.out.print(request);
-			}
-		};
+      
         setTitle(agencyName);
         this.agencyName = agencyName;
     }
@@ -108,6 +101,10 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void addRequest(BookingAgencyListLine obj){
+    	
+    	listModel.addElement(obj);
+    }
     private void jbSendAgencyReplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendAgencyReplyActionPerformed
         BookingAgencyListLine jListLine = jList1.getSelectedValue();
         double price = Double.parseDouble(this.jtfTotalPrice.getText());

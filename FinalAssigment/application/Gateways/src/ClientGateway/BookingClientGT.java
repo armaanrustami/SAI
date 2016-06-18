@@ -11,66 +11,54 @@ import Chain.MessageSender;
 import booking.model.client.ClientBookingReply;
 import booking.model.client.ClientBookingRequest;
 
-public abstract  class BookingClientGT {
+public abstract class BookingClientGT {
 
-	MessageSender sender; 
-	 MessageReceiver reciever;
-	 ClientSerializer serializer;
-	String Channel="ClientToAgency";
-	String Channel1="AgencyToClient";
-	HashMap<String,ClientBookingRequest> Hash ;
-	
-	
-	public BookingClientGT(String Channel){
-		this.Channel=Channel;
+	MessageSender sender;
+	MessageReceiver reciever;
+	ClientSerializer serializer;
+
+	public BookingClientGT(String send, String rec) {
+
 		try {
-			sender=new MessageSender(Channel1);
-			reciever=new MessageReceiver(Channel );
-			serializer=new ClientSerializer();
+			sender = new MessageSender(send);
+			reciever = new MessageReceiver(rec);
+			serializer = new ClientSerializer();
 		} catch (JMSException e1) {
 			e1.printStackTrace();
 		} catch (NamingException e1) {
 			e1.printStackTrace();
 		}
-	
-		Hash=new HashMap<String, ClientBookingRequest>();
-		
-		reciever.setListener(new MessageListener(){
-				@Override
-				public void onMessage(Message msg) {
+
+		reciever.setListener(new MessageListener() {
+			@Override
+			public void onMessage(Message msg) {
 				try {
-					if(Hash.containsKey(msg.getJMSCorrelationID()))		
-					{				
-						ClientBookingReply reply=serializer.replyFromSTring(((TextMessage)msg).getText());
-						try {
-						onBookingReplyArrived(Hash.get(msg.getJMSCorrelationID()) , reply);
-						} catch (JMSException e) {	
-						}
-						}
-				} catch (JMSException e) {	
-				}
+
+					ClientBookingReply reply = serializer.replyFromSTring(((TextMessage) msg).getText());
+					onBookingReplyArrived(null, reply);
 					
+
+				} catch (JMSException e) {
 				}
+
+			}
 		});
 	}
-	public void applyForBooking(ClientBookingRequest loan){
-		
-	
-		String MsgId="";
+
+	public void applyForBooking(ClientBookingRequest req) {
+
+		String MsgId = "";
 		try {
-			MsgId = sender.Send(sender.createTextMessage(serializer.requestToString(loan)));
+			MsgId = sender.Send(sender.createTextMessage(serializer.requestToString(req)));
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Hash.put(MsgId,loan);
-		System.out.println("ClienSend: "+MsgId);
-		
-		
-		
-	} 
+
+		System.out.println("ClienSend: " + MsgId);
+
+	}
+
 	public abstract void onBookingReplyArrived(ClientBookingRequest request, ClientBookingReply reply);
-		
-	
-	
+
 }

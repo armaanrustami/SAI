@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="Chain.MessageSender"/>
-<fullyQualifiedTypeName name="Chain.MessageReceiver"/>
-<fullyQualifiedTypeName name="booking.model.client.ClientBookingRequest"/>
-<fullyQualifiedTypeName name="booking.model.client.ClientBookingReply"/>
 <fullyQualifiedTypeName name="com.owlike.genson.Genson"/>
+<fullyQualifiedTypeName name="booking.model.client.ClientBookingReply"/>
+<fullyQualifiedTypeName name="Chain.MessageReceiver"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="Chain.MessageSender"/>
+<fullyQualifiedTypeName name="javax.jms.JMSException"/>
+<fullyQualifiedTypeName name="javax.naming.NamingException"/>
+<fullyQualifiedTypeName name="javax.jms.MessageListener"/>
+<fullyQualifiedTypeName name="booking.model.agency.AgencyReply"/>
+<fullyQualifiedTypeName name="javax.jms.TextMessage"/>
+<fullyQualifiedTypeName name="java.nio.channels.GatheringByteChannel"/>
+<fullyQualifiedTypeName name="ClientGateway.BookingClientGT"/>
+<fullyQualifiedTypeName name="AgencyGateway.AgencyGT"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="booking.model.agency.AgencyRequest"/>
+<fullyQualifiedTypeName name="booking.model.client.ClientBookingRequest"/>
 </qualifiedTypeNameHistroy>

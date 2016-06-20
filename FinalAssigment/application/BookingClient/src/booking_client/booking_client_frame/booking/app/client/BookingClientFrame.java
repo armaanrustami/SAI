@@ -29,7 +29,7 @@ public class BookingClientFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public BookingClientFrame() {
-    	gateway=new BookingClientGT("bookFastQueue","bookFastQueuetoCl") {
+    	gateway=new BookingClientGT( ) {
 			
 			@Override
 			public void onBookingReplyArrived(ClientBookingRequest request, ClientBookingReply reply) {

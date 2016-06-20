@@ -2,18 +2,22 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.owlike.genson.Genson"/>
 <fullyQualifiedTypeName name="booking.model.client.ClientBookingReply"/>
-<fullyQualifiedTypeName name="Chain.MessageReceiver"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="Chain.MessageSender"/>
 <fullyQualifiedTypeName name="javax.jms.JMSException"/>
 <fullyQualifiedTypeName name="javax.naming.NamingException"/>
-<fullyQualifiedTypeName name="javax.jms.MessageListener"/>
-<fullyQualifiedTypeName name="booking.model.agency.AgencyReply"/>
 <fullyQualifiedTypeName name="javax.jms.TextMessage"/>
 <fullyQualifiedTypeName name="java.nio.channels.GatheringByteChannel"/>
 <fullyQualifiedTypeName name="ClientGateway.BookingClientGT"/>
 <fullyQualifiedTypeName name="AgencyGateway.AgencyGT"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="booking.model.agency.AgencyRequest"/>
+<fullyQualifiedTypeName name="javax.jms.Message"/>
+<fullyQualifiedTypeName name="com.sun.xml.bind.v2.runtime.unmarshaller.Receiver"/>
+<fullyQualifiedTypeName name="Chain.MessageReceiver"/>
 <fullyQualifiedTypeName name="booking.model.client.ClientBookingRequest"/>
+<fullyQualifiedTypeName name="booking.model.agency.AgencyRequest"/>
+<fullyQualifiedTypeName name="ClientGateway.ClientSerializer"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="Controller"/>
+<fullyQualifiedTypeName name="booking.model.agency.AgencyReply"/>
+<fullyQualifiedTypeName name="javax.jms.MessageListener"/>
 </qualifiedTypeNameHistroy>

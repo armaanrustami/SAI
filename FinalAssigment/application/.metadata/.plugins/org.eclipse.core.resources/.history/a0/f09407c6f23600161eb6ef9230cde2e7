@@ -1,0 +1,68 @@
+
+
+import java.util.HashMap;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+import javax.naming.NamingException;
+import Chain.MessageReceiver;
+import Chain.MessageSender;
+import booking.model.client.ClientBookingReply;
+import booking.model.client.ClientBookingRequest;
+
+public abstract class BookingClientGT {
+
+	MessageSender sender;
+	MessageReceiver reciever;
+	ClientSerializer serializer;
+	HashMap<String,ClientBookingRequest> Hash;
+
+	public BookingClientGT() {
+
+		try {
+			sender = new MessageSender("ToOGateway");
+			reciever = new MessageReceiver("FromGateway");
+			serializer = new ClientSerializer();
+			Hash=new HashMap<>();
+		} catch (JMSException e1) {
+			e1.printStackTrace();
+		} catch (NamingException e1) {
+			e1.printStackTrace();
+		}
+
+		reciever.setListener(new MessageListener() {
+			@Override
+			public void onMessage(Message msg) {
+				try {
+
+					ClientBookingReply reply = serializer.replyFromSTring(((TextMessage) msg).getText());
+					onBookingReplyArrived(null, reply);
+					
+
+				} catch (JMSException e) {
+				}
+
+			}
+		});
+	}
+
+	public void applyForBooking(ClientBookingRequest req) {
+
+		String MsgId = "";
+		try {
+			
+			MsgId = sender.Send(sender.createTextMessage(serializer.requestToString(req)));
+			Hash.put(MsgId, req);
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("ClienSend: " + MsgId);
+
+	}
+
+	public abstract void onBookingReplyArrived(ClientBookingRequest request, ClientBookingReply reply);
+
+}

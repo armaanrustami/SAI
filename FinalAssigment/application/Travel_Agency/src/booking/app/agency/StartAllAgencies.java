@@ -15,7 +15,7 @@ public class StartAllAgencies {
 				try {
 					BookingAgencyFrame frame = new BookingAgencyFrame("Book Fast", "bookFastQueue");
 
-					Fast = new AgencyGT("bookFastQueue") {
+					Fast = new AgencyGT("ToFastAgency") {
 
 						@Override
 						public void onAgencyReplyArrived(AgencyReply reply, AgencyRequest request) {
@@ -36,7 +36,7 @@ public class StartAllAgencies {
 				try {
 					BookingAgencyFrame frame = new BookingAgencyFrame("Book Cheap", "bookCheapQueue");
 					frame.setVisible(true);
-					Cheap = new AgencyGT("bookCheapQueue") {
+					Cheap = new AgencyGT("ToCheapAgency") {
 
 						@Override
 						public void onAgencyReplyArrived(AgencyReply reply, AgencyRequest request) {
@@ -57,7 +57,7 @@ public class StartAllAgencies {
 					 BookingAgencyFrame frame = new BookingAgencyFrame ("BookGood Service",
 					 "bookGoodServiceQueue");
 					 frame.setVisible(true);
-					 Good = new AgencyGT("bookGoodServiceQueue") {
+					 Good = new AgencyGT("ToGoodAgency") {
 
 							@Override
 							public void onAgencyReplyArrived(AgencyReply reply, AgencyRequest request) {

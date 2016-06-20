@@ -18,11 +18,11 @@ public abstract class BookingClientGT {
 	ClientSerializer serializer;
 	HashMap<String,ClientBookingRequest> Hash;
 
-	public BookingClientGT(String send, String rec) {
+	public BookingClientGT() {
 
 		try {
-			sender = new MessageSender(send);
-			reciever = new MessageReceiver(rec);
+			sender = new MessageSender("ToGateway");
+			reciever = new MessageReceiver("FromGateway");
 			serializer = new ClientSerializer();
 			Hash=new HashMap<>();
 		} catch (JMSException e1) {

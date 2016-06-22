@@ -17,7 +17,7 @@ public abstract class BookingClientGT {
 	MessageSender sender;
 	MessageReceiver reciever;
 	ClientSerializer serializer;
-	HashMap<String,ClientBookingRequest> Hash;
+	HashMap<String, ClientBookingRequest> Hash;
 
 	public BookingClientGT() {
 
@@ -25,7 +25,7 @@ public abstract class BookingClientGT {
 			sender = new MessageSender("FromClient");
 			reciever = new MessageReceiver("ToClient");
 			serializer = new ClientSerializer();
-			Hash=new HashMap<>();
+			Hash = new HashMap<>();
 		} catch (JMSException e1) {
 			e1.printStackTrace();
 		} catch (NamingException e1) {
@@ -39,7 +39,6 @@ public abstract class BookingClientGT {
 
 					ClientBookingReply reply = serializer.replyFromSTring(((TextMessage) msg).getText());
 					onBookingReplyArrived(Hash.get(msg.getJMSCorrelationID()), reply);
-					
 
 				} catch (JMSException e) {
 				}
@@ -52,14 +51,13 @@ public abstract class BookingClientGT {
 
 		String MsgId = "";
 		try {
-			
+
 			MsgId = sender.Send(sender.createTextMessage(serializer.requestToString(req)));
 			Hash.put(MsgId, req);
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		System.out.println("ClienSend: " + MsgId);
 
 	}

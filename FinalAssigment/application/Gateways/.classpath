@@ -28,5 +28,7 @@
 	<classpathentry kind="lib" path="C:/Users/king/OneDrive/fontys/Block10/SAI/SAI/FinalAssigment/application/Gateways/src/lib/validation-api-1.1.0.Final.jar"/>
 	<classpathentry kind="lib" path="/BookingClient/src/booking_client_model.jar"/>
 	<classpathentry kind="lib" path="/Travel_Agency/travel_agency_model.jar"/>
+	<classpathentry kind="lib" path="src/lib/okhttp-2.5.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/okio-1.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

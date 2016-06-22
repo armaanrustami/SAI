@@ -59,12 +59,12 @@ public abstract class Controller {
 					 
 					ClientBookingRequest request=serializer.requestFromString(((TextMessage) arg0).getText());
 					onBookingRequestArrived(request ,  null);
-					AgencyRequest angencyRequest =new AgencyRequest(request.getDestinationAirport(), request.getOriginAirport(), 0);
+				//	AgencyRequest angencyRequest =new AgencyRequest(request.getDestinationAirport(), request.getOriginAirport(), 0);
 					if(!Hash.containsKey(arg0.getJMSMessageID())){
 					Hash.put( arg0.getJMSMessageID(), request);}
 					//goodAgencySender.Send(arg0, arg0.getJMSMessageID());
 					arg0.setJMSCorrelationID(arg0.getJMSMessageID());
-					fastAgencySender.Send(fastAgencySender.createTextMessage(agencySerializer.agencyRequestToString(angencyRequest)), arg0.getJMSMessageID());
+					fastAgencySender.Send(arg0, arg0.getJMSMessageID());
 					
 					
 				} catch (JMSException e) {

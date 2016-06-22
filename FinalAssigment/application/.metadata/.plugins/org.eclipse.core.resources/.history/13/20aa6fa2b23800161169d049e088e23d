@@ -39,9 +39,11 @@ public abstract class AgencyGT {
 				// TODO Auto-generated method stub
 
 				try {
-					System.out.println("DONE");					
-					AgencyRequest Req=serializer.agencyRequestFromString(((TextMessage) arg0).getText());
+					System.out.println("DONE");
+					ClientBookingRequest Reques = serializer.requestFromString(((TextMessage) arg0).getText());
+					AgencyRequest Req=new AgencyRequest(Reques.getDestinationAirport(), Reques.getOriginAirport(), Reques.getNumberOfTravellers());
 					onAgencyRequestArrived(null, Req);
+					
 					System.out.println(arg0.getJMSCorrelationID());
 					if(!Hash.containsValue(arg0.getJMSCorrelationID())){
 					Hash.put(Req, arg0.getJMSCorrelationID());}
@@ -49,7 +51,9 @@ public abstract class AgencyGT {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
+
 		});
 
 	}

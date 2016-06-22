@@ -7,6 +7,9 @@
 	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
 	<item value="C:\Users\king\OneDrive\fontys\Block10\SAI\SAI\FinalAssigment\application\Gateways\src\ClientGateway" key="org.eclipse.jdt.ui.last.external.project"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="false" key="renameSubpackages"/>
+		<item value="false" key="updateQualifiedNames"/>
+		<item value="*" key="patterns"/>
 		<item value="false" key="updateSimilarElements"/>
 		<item value="false" key="renameSetter"/>
 		<item value="false" key="updateTextualMatches"/>

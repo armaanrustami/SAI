@@ -34,6 +34,12 @@ public class BookingClientFrame extends javax.swing.JFrame {
 			@Override
 			public void onBookingReplyArrived(ClientBookingRequest request, ClientBookingReply reply) {
 				// TODO Auto-generated method stub
+				 for (int i = 0; i < listModel.getSize(); i++) {
+			            ClientListLine rr = listModel.get(i);
+			            if (rr.getRequest() == request) {
+			               listModel.remove(i);
+			               listModel.insertElementAt(new ClientListLine(request,reply), i);;return;
+			            }}
 				
 			}
 		};

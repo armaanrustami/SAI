@@ -1,0 +1,140 @@
+package BrokorGT;
+
+
+import java.util.HashMap;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+import javax.naming.NamingException;
+
+import AgencyGateway.AgencySerializer;
+import ClientGateway.ClientSerializer;
+import booking.model.agency.AgencyReply;
+import booking.model.client.ClientBookingRequest;
+import sender_Receiver.MessageReceiver;
+import sender_Receiver.MessageSender;
+ 
+
+public abstract class Controller {
+
+	MessageSender clientSender,fastAgencySender,goodAgencySender,cheapAgencySender;
+	MessageReceiver Clientreciever,fastAgencyReceiver,goodAgencyReceiver,cheapAgencyReceiver;//todo make efficient 
+	ClientSerializer serializer;
+	AgencySerializer agencySerializer;
+	//AgencyGT agency;
+	HashMap<String,ClientBookingRequest> Hash=new HashMap<>();
+	
+	public Controller() {
+
+		try {
+			clientSender = new MessageSender("ToClient");
+			fastAgencySender=new MessageSender("bookFastQueue");
+			//goodAgencySender= new MessageSender("bookGoodServiceQueue");
+			//cheapAgencySender= new MessageSender("bookCheapQueue");
+			Clientreciever = new MessageReceiver("FromClient");
+			fastAgencyReceiver=new MessageReceiver("ToAgency");
+			//goodAgencyReceiver=new MessageReceiver("ToAgency");
+			//cheapAgencyReceiver=new MessageReceiver("ToAgency");
+			serializer = new ClientSerializer();
+			agencySerializer=new AgencySerializer();
+			
+			
+		} catch (JMSException e1) {
+			e1.printStackTrace();
+		} catch (NamingException e1) {
+			e1.printStackTrace();
+		}
+		
+
+
+		Clientreciever.setListener(new MessageListener() {
+			
+			@Override
+			public void onMessage(Message arg0) {
+				// TODO Auto-generated method stub
+				try {
+					 
+					ClientBookingRequest request=serializer.requestFromString(((TextMessage) arg0).getText());
+					onBookingRequestArrived(request ,  null);
+				//	AgencyRequest angencyRequest =new AgencyRequest(request.getDestinationAirport(), request.getOriginAirport(), 0);
+					if(!Hash.containsKey(arg0.getJMSMessageID())){
+					Hash.put( arg0.getJMSMessageID(), request);}
+				fastAgencySender.Send(arg0, arg0.getJMSMessageID());
+					//goodAgencySender.Send(arg0, arg0.getJMSMessageID());
+					arg0.setJMSCorrelationID(arg0.getJMSMessageID());
+					
+					
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}			
+			}
+		});
+		fastAgencyReceiver.setListener(new MessageListener() {
+			
+			@Override
+			public void onMessage(Message arg0) {
+				// TODO Auto-generated method stub
+				
+				try {
+				//	clientSender.Send(arg0);
+					AgencyReply reply= agencySerializer.replyFromString(((TextMessage)arg0).getText());
+					onBookingReplyArrived( Hash.get(arg0.getJMSCorrelationID()),reply );
+					clientSender.Send(arg0, arg0.getJMSCorrelationID());
+					
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		
+/*		goodAgencyReceiver.setListener(new MessageListener() {
+			
+			@Override
+			public void onMessage(Message arg0) {
+				// TODO Auto-generated method stub
+				try {
+					clientSender.Send(arg0);
+					AgencyReply reply= agencySerializer.replyFromString(((TextMessage)arg0).getText());
+					onBookingReplyArrived( Hash.get(arg0.getJMSCorrelationID()),reply );
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					
+			}
+		});
+		
+		cheapAgencyReceiver.setListener(new MessageListener() {
+			
+			@Override
+			public void onMessage(Message arg0) {
+				// TODO Auto-generated method stub
+				
+				try {
+					clientSender.Send(arg0);
+					AgencyReply reply= agencySerializer.replyFromString(((TextMessage)arg0).getText());
+					onBookingReplyArrived( Hash.get(arg0.getJMSCorrelationID()),reply );
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});*/
+		
+	}
+
+	public abstract void onBookingReplyArrived(ClientBookingRequest request, AgencyReply reply) ;
+
+		
+
+	
+
+	public abstract void onBookingRequestArrived(ClientBookingRequest request, AgencyReply reply);
+
+}

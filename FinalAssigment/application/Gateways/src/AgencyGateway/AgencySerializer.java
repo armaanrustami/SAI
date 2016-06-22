@@ -27,6 +27,12 @@ public class AgencySerializer {
 			return genson.serialize(reply);
 		
     }
+    public String agencyRequestToString(AgencyRequest request){
+        return genson.serialize(request);
+    }
+    public AgencyRequest agencyRequestFromString(String request){
+        return  genson.deserialize(request, AgencyRequest.class);
+    }
     
     public AgencyReply replyFromString(String str){
     	return genson.deserialize(str, AgencyReply.class);

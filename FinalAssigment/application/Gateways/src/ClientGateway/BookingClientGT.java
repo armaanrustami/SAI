@@ -6,10 +6,11 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 import javax.naming.NamingException;
-import Chain.MessageReceiver;
-import Chain.MessageSender;
+
 import booking.model.client.ClientBookingReply;
 import booking.model.client.ClientBookingRequest;
+import sender_Receiver.MessageReceiver;
+import sender_Receiver.MessageSender;
 
 public abstract class BookingClientGT {
 
@@ -21,8 +22,8 @@ public abstract class BookingClientGT {
 	public BookingClientGT() {
 
 		try {
-			sender = new MessageSender("ToGateway");
-			reciever = new MessageReceiver("FromGateway");
+			sender = new MessageSender("FromClient");
+			reciever = new MessageReceiver("ToClient");
 			serializer = new ClientSerializer();
 			Hash=new HashMap<>();
 		} catch (JMSException e1) {
@@ -37,7 +38,7 @@ public abstract class BookingClientGT {
 				try {
 
 					ClientBookingReply reply = serializer.replyFromSTring(((TextMessage) msg).getText());
-					onBookingReplyArrived(null, reply);
+					onBookingReplyArrived(Hash.get(msg.getJMSCorrelationID()), reply);
 					
 
 				} catch (JMSException e) {

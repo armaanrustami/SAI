@@ -21,19 +21,35 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
 	
     private DefaultListModel<BookingAgencyListLine> listModel = new DefaultListModel<>();
     private String agencyName;
+    AgencyReply reply;
 
     /**
      * Creates new form TravelApprovalFrame
      *
      * @param agencyName
      */
-    
+    AgencyGT agency;
     public BookingAgencyFrame(String agencyName, String bankRequestQueue) {
     	
         initComponents();
       
+        agency=new AgencyGT(bankRequestQueue) {
+			
+			@Override
+			public void onAgencyRequestArrived(AgencyReply reply, AgencyRequest request) {
+				// TODO Auto-generated method stub
+				addRequest(new BookingAgencyListLine(request, reply));
+			}
+		};
         setTitle(agencyName);
         this.agencyName = agencyName;
+   
+        
+        
+        
+        
+        
+        
     }
 
     /**
@@ -109,6 +125,7 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
         AgencyReply reply = new AgencyReply(this.agencyName, price);
         if (jListLine != null) {
             jListLine.setReply(reply);
+            agency.onAgencyReply(reply, jListLine.getRequest());
             jList1.repaint();
         }
     }//GEN-LAST:event_jbSendAgencyReplyActionPerformed
@@ -160,4 +177,11 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
     	
     	listModel.addElement(obj);
     }
+ public AgencyReply getReply() {
+	return reply;
+}
+	 
+	 
+	 
+ 
 }

@@ -16,58 +16,60 @@ import sender_Receiver.MessageSender;
 
 public abstract class AgencyGT {
 
-	MessageReceiver Reciever;
-	MessageSender sender;
-	AgencySerializer serializer;
-	HashMap<AgencyRequest, String>	Hash=new HashMap<>();
-	public AgencyGT(String Send) {
-		// sender=new MessageSenderGateway(ChannelName)
-		try {
-			
-			// todo
-			
-			Reciever = new MessageReceiver(Send);
-			sender = new MessageSender("ToAgency");
-			serializer = new AgencySerializer();
-		} catch (JMSException | NamingException e) {
-			e.printStackTrace();
-		}
-		Reciever.setListener(new MessageListener() {
+    MessageReceiver Reciever;
+    MessageSender sender;
+    AgencySerializer serializer;
+    HashMap<AgencyRequest, String> Hash = new HashMap<>();
 
-			@Override
-			public void onMessage(Message arg0) {
-				// TODO Auto-generated method stub
+    public AgencyGT(String Send) {
+        // sender=new MessageSenderGateway(ChannelName)
+        try {
 
-				try {
-					System.out.println("DONE");					
-					AgencyRequest Req=serializer.agencyRequestFromString(((TextMessage) arg0).getText());
-					onAgencyRequestArrived(null, Req);
-					System.out.println(arg0.getJMSCorrelationID());
-					if(!Hash.containsValue(arg0.getJMSCorrelationID())){
-					Hash.put(Req, arg0.getJMSCorrelationID());}
-				} catch (JMSException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
+            // todo
 
-	}
+            Reciever = new MessageReceiver(Send);
+            sender = new MessageSender("ToAgency");
+            serializer = new AgencySerializer();
+        } catch (JMSException | NamingException e) {
+            e.printStackTrace();
+        }
+        Reciever.setListener(new MessageListener() {
 
-	public abstract void onAgencyRequestArrived(AgencyReply reply, AgencyRequest request);
+            @Override
+            public void onMessage(Message arg0) {
+                // TODO Auto-generated method stub
 
-	public void onAgencyReply(AgencyReply reply, AgencyRequest request) {
+                try {
+                    System.out.println("DONE");
+                    AgencyRequest Req = serializer.agencyRequestFromString(((TextMessage) arg0).getText());
+                    onAgencyRequestArrived(null, Req);
+                    System.out.println(arg0.getJMSCorrelationID());
+                    if (!Hash.containsValue(arg0.getJMSCorrelationID())) {
+                        Hash.put(Req, arg0.getJMSCorrelationID());
+                    }
+                } catch (JMSException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
 
-		try {
-			sender.createTextMessage(serializer.replyToString(reply));
-			
-			System.out.println( Hash.get(request));
-			sender.Send(sender.createTextMessage(serializer.replyToString(reply)), Hash.get(request));
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    }
 
-	}
+    public abstract void onAgencyRequestArrived(AgencyReply reply, AgencyRequest request);
+
+    public void onAgencyReply(AgencyReply reply, AgencyRequest request) {
+
+        try {
+            sender.createTextMessage(serializer.replyToString(reply));
+
+            System.out.println(Hash.get(request));
+            sender.Send(sender.createTextMessage(serializer.replyToString(reply)), Hash.get(request));
+        } catch (JMSException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 
 }

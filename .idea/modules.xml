@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FinalAssigment/application/BookingClient/BookingClient.iml" filepath="$PROJECT_DIR$/FinalAssigment/application/BookingClient/BookingClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FinalAssigment/application/Gateways/Gateways.iml" filepath="$PROJECT_DIR$/FinalAssigment/application/Gateways/Gateways.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FinalAssigment/application/MaiGateway/MaiGateway.iml" filepath="$PROJECT_DIR$/FinalAssigment/application/MaiGateway/MaiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FinalAssigment/application/Travel_Agency/Travel_Agency.iml" filepath="$PROJECT_DIR$/FinalAssigment/application/Travel_Agency/Travel_Agency.iml" />
+    </modules>
+  </component>
+</project>

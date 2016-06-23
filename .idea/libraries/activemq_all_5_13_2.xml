@@ -1,0 +1,36 @@
+<component name="libraryTable">
+  <library name="activemq-all-5.13.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/activemq-all-5.13.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/aopalliance-repackaged-2.4.0-b34.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/asm-debug-all-5.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/genson-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/hk2-api-2.4.0-b34.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/hk2-locator-2.4.0-b34.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/hk2-utils-2.4.0-b34.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/javassist-3.18.1-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/javax.annotation-api-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/javax.inject-2.4.0-b34.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/javax.servlet-api-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/javax.ws.rs-api-2.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jaxb-api-2.2.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jersey-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jersey-common.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jersey-container-servlet-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jersey-container-servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jersey-guava-2.22.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jersey-media-jaxb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/jersey-server.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/okhttp-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/okio-1.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/osgi-resource-locator-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/persistence-api-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/validation-api-1.1.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/org.osgi.core-4.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/FinalAssigment/application/Gateways/src/lib/org.osgi.core-4.2.0.jar!/OSGI-OPT/src" />
+    </SOURCES>
+  </library>
+</component>

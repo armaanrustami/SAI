@@ -6,21 +6,22 @@
 package booking_client.booking_client_frame.booking.app.client;
 
 import javax.swing.DefaultListModel;
+
 import booking.model.client.Address;
 import booking.model.client.ClientBookingReply;
 import booking.model.client.ClientBookingRequest;
+
 import javax.swing.JCheckBox;
 
 import ClientGateway.BookingClientGT;
 
 
 /**
- *
  * @author mpesic
  */
 
 public class BookingClientFrame extends javax.swing.JFrame {
-	  BookingClientGT gateway;
+    BookingClientGT gateway;
 
     private DefaultListModel<ClientListLine> listModel = new DefaultListModel<>();
 
@@ -29,20 +30,23 @@ public class BookingClientFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public BookingClientFrame() {
-    	gateway=new BookingClientGT( ) {
-			
-			@Override
-			public void onBookingReplyArrived(ClientBookingRequest request, ClientBookingReply reply) {
-				// TODO Auto-generated method stub
-				 for (int i = 0; i < listModel.getSize(); i++) {
-			            ClientListLine rr = listModel.get(i);
-			            if (rr.getRequest() == request) {
-			               listModel.remove(i);
-			               listModel.insertElementAt(new ClientListLine(request,reply), i);;return;
-			            }}
-				
-			}
-		};
+        gateway = new BookingClientGT() {
+
+            @Override
+            public void onBookingReplyArrived(ClientBookingRequest request, ClientBookingReply reply) {
+                // TODO Auto-generated method stub
+                for (int i = 0; i < listModel.getSize(); i++) {
+                    ClientListLine rr = listModel.get(i);
+                    if (rr.getRequest() == request) {
+                        listModel.remove(i);
+                        listModel.insertElementAt(new ClientListLine(request, reply), i);
+                        ;
+                        return;
+                    }
+                }
+
+            }
+        };
         initComponents();
         setTransfer(this.jcbTransfer.isSelected());
     }
@@ -90,8 +94,8 @@ public class BookingClientFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking Client");
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
-        layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        layout.columnWidths = new int[]{0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        layout.rowHeights = new int[]{0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         getContentPane().setLayout(layout);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -257,6 +261,7 @@ public class BookingClientFrame extends javax.swing.JFrame {
         this.tfTransferHouseNumber.setEnabled(withTransfer);
         this.tfTransferCity.setEnabled(withTransfer);
     }
+
     private void jcbTransferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTransferActionPerformed
         JCheckBox cbTransfer = (JCheckBox) evt.getSource();
         setTransfer(cbTransfer.isSelected());

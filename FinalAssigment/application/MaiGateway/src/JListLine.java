@@ -7,49 +7,48 @@ import booking.model.client.ClientBookingRequest;
 /**
  * This class represents one line in the JList in Loan Broker.
  * This class stores all objects that belong to one LoanRequest:
- *    - LoanRequest,
- *    - BankInterestRequest, and
- *    - BankInterestReply.
- *  Use objects of this class to add them to the JList.
- *    
+ * - LoanRequest,
+ * - BankInterestRequest, and
+ * - BankInterestReply.
+ * Use objects of this class to add them to the JList.
  */
 class JListLine {
-	
-	private ClientBookingRequest Request;
-	private AgencyRequest agencyRequest;
-	private AgencyReply agencyReply;
 
-	public JListLine(ClientBookingRequest Request) {
-		this.setRequest(Request);
-	}
+    private ClientBookingRequest Request;
+    private AgencyRequest agencyRequest;
+    private AgencyReply agencyReply;
 
-	public ClientBookingRequest getRequest() {
-		return Request;
-	}
+    public JListLine(ClientBookingRequest Request) {
+        this.setRequest(Request);
+    }
 
-	public void setRequest(ClientBookingRequest Request) {
-		this.Request = Request;
-	}
+    public ClientBookingRequest getRequest() {
+        return Request;
+    }
 
-	public AgencyRequest getAgencyRequest() {
-		return agencyRequest;
-	}
+    public void setRequest(ClientBookingRequest Request) {
+        this.Request = Request;
+    }
 
-	public void setAgencyRequest(AgencyRequest agencyRequest) {
-		this.agencyRequest = agencyRequest;
-	}
+    public AgencyRequest getAgencyRequest() {
+        return agencyRequest;
+    }
 
-	public AgencyReply getAgencyReply() {
-		return agencyReply;
-	}
+    public void setAgencyRequest(AgencyRequest agencyRequest) {
+        this.agencyRequest = agencyRequest;
+    }
 
-	public void setAgencyReply(AgencyReply agencyReply) {
-		this.agencyReply = agencyReply;
-	}
+    public AgencyReply getAgencyReply() {
+        return agencyReply;
+    }
 
-	@Override
-	public String toString() {
-		return Request.toString() + " || " + ((agencyReply != null) ? agencyReply.toString() : "waiting for reply...");
-	}
+    public void setAgencyReply(AgencyReply agencyReply) {
+        this.agencyReply = agencyReply;
+    }
+
+    @Override
+    public String toString() {
+        return Request.toString() + " || " + ((agencyReply != null) ? agencyReply.toString() : "waiting for reply...");
+    }
 
 }

@@ -8,41 +8,41 @@ import javax.naming.NamingException;
 
 public class MessageReceiver {
 
-	Connection connection;
-	Session session;
-	Destination destination ;
-	MessageConsumer consumer;
-	public MessageReceiver(String  channel) throws JMSException, NamingException{
-		
+    Connection connection;
+    Session session;
+    Destination destination;
+    MessageConsumer consumer;
 
-		Properties props = new Properties();
-		props.setProperty(Context.INITIAL_CONTEXT_FACTORY,
-		"org.apache.activemq.jndi.ActiveMQInitialContextFactory");
-		props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
-		props.put(("queue."+channel), channel);
-		
-		Context jndiContext = new InitialContext(props);
-		ConnectionFactory connectionFactory = (ConnectionFactory) jndiContext.lookup("ConnectionFactory");
-		connection = connectionFactory.createConnection();
-		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		// connect to the receiver destination
-		destination = (Destination) jndiContext.lookup(channel);
-		consumer = session.createConsumer(destination);
-		connection.start();
+    public MessageReceiver(String channel) throws JMSException, NamingException {
 
-	}
-	
-	public void setListener(MessageListener ml){
-		
-		try {
-			consumer.setMessageListener(ml);
-		} catch (Exception m) {
-		}
-		
-		
-	}
-	
-	
-	
+
+        Properties props = new Properties();
+        props.setProperty(Context.INITIAL_CONTEXT_FACTORY,
+                "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
+        props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
+        props.put(("queue." + channel), channel);
+
+        Context jndiContext = new InitialContext(props);
+        ConnectionFactory connectionFactory = (ConnectionFactory) jndiContext.lookup("ConnectionFactory");
+        connection = connectionFactory.createConnection();
+        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        // connect to the receiver destination
+        destination = (Destination) jndiContext.lookup(channel);
+        consumer = session.createConsumer(destination);
+        connection.start();
+
+    }
+
+    public void setListener(MessageListener ml) {
+
+        try {
+            consumer.setMessageListener(ml);
+        } catch (Exception m) {
+        }
+
+
+    }
+
+
 }
 

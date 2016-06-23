@@ -7,18 +7,17 @@ package booking.app.agency;
 
 import booking.model.agency.AgencyReply;
 import booking.model.agency.AgencyRequest;
+
 import javax.swing.DefaultListModel;
 
 import AgencyGateway.AgencyGT;
 
 /**
- *
  * @author mpesic
  */
 public class BookingAgencyFrame extends javax.swing.JFrame {
 
 
-	
     private DefaultListModel<BookingAgencyListLine> listModel = new DefaultListModel<>();
     private String agencyName;
     AgencyReply reply;
@@ -29,27 +28,23 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
      * @param agencyName
      */
     AgencyGT agency;
+
     public BookingAgencyFrame(String agencyName, String bankRequestQueue) {
-    	
+
         initComponents();
-      
-        agency=new AgencyGT(bankRequestQueue) {
-			
-			@Override
-			public void onAgencyRequestArrived(AgencyReply reply, AgencyRequest request) {
-				// TODO Auto-generated method stub
-				addRequest(new BookingAgencyListLine(request, reply));
-			}
-		};
+
+        agency = new AgencyGT(bankRequestQueue) {
+
+            @Override
+            public void onAgencyRequestArrived(AgencyReply reply, AgencyRequest request) {
+                // TODO Auto-generated method stub
+                addRequest(new BookingAgencyListLine(request, reply));
+            }
+        };
         setTitle(agencyName);
         this.agencyName = agencyName;
-   
-        
-        
-        
-        
-        
-        
+
+
     }
 
     /**
@@ -71,8 +66,8 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
-        layout.columnWidths = new int[] {0, 4, 0, 4, 0, 4, 0};
-        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        layout.columnWidths = new int[]{0, 4, 0, 4, 0, 4, 0};
+        layout.rowHeights = new int[]{0, 5, 0, 5, 0, 5, 0, 5, 0};
         getContentPane().setLayout(layout);
 
         jList1.setModel(listModel);
@@ -117,7 +112,7 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+
     private void jbSendAgencyReplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendAgencyReplyActionPerformed
         BookingAgencyListLine jListLine = jList1.getSelectedValue();
         double price = Double.parseDouble(this.jtfTotalPrice.getText());
@@ -172,16 +167,16 @@ public class BookingAgencyFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbSendAgencyReply;
     private javax.swing.JTextField jtfTotalPrice;
+
     // End of variables declaration//GEN-END:variables
- public void addRequest(BookingAgencyListLine obj){
-    	
-    	listModel.addElement(obj);
+    public void addRequest(BookingAgencyListLine obj) {
+
+        listModel.addElement(obj);
     }
- public AgencyReply getReply() {
-	return reply;
-}
-	 
-	 
-	 
- 
+
+    public AgencyReply getReply() {
+        return reply;
+    }
+
+
 }

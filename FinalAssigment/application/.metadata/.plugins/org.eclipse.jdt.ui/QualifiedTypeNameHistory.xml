@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.owlike.genson.Genson"/>
-<fullyQualifiedTypeName name="booking.model.client.ClientBookingReply"/>
 <fullyQualifiedTypeName name="Chain.MessageSender"/>
 <fullyQualifiedTypeName name="javax.jms.JMSException"/>
 <fullyQualifiedTypeName name="javax.naming.NamingException"/>
@@ -24,4 +23,7 @@
 <fullyQualifiedTypeName name="AgencyGateway.AgencySerializer"/>
 <fullyQualifiedTypeName name="BrokorGT.Controller"/>
 <fullyQualifiedTypeName name="sender_Receiver.MessageSender"/>
+<fullyQualifiedTypeName name="googleApi.DistanceFromGoogle"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="booking.model.client.ClientBookingReply"/>
 </qualifiedTypeNameHistroy>
